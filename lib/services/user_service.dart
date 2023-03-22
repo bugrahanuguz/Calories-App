@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:softito_final_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,5 +21,17 @@ class UserService {
       }
     }
     return list;
+  }
+
+  Future<UserModel?> postUser(UserModel user) async {
+    http.Response response = await http.post(getUrl("users"),
+        body: user.toJson(), headers: {"Content-Type": "application/json"});
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
+      user.id = data["name"];
+      return user;
+    } else {
+      return null;
+    }
   }
 }
