@@ -19,4 +19,12 @@ class UserViewModel extends ChangeNotifier {
     _users = response;
     notifyListeners();
   }
+
+  Future setList(String name, String email) async {
+    UserModel newUser = UserModel(name: name, email: email);
+    final response = await services.postUser(newUser);
+    _user = response;
+    getList();
+    notifyListeners();
+  }
 }
