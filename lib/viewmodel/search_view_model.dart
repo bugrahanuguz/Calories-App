@@ -19,4 +19,9 @@ class SearchViewModel extends ChangeNotifier {
     foodList.removeAt(index);
     notifyListeners();
   }
+
+  clearFoodList() {
+    foodList.clear();
+    notifyListeners();
+  }
 }

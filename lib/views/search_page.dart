@@ -116,7 +116,9 @@ class _SearchPageState extends State<SearchPage> {
                 await Provider.of<FoodViewModel>(context, listen: false);
             provider.setFoods(foodList[i], user);
           }
-          foodList.length = 0;
+          var provider =
+              await Provider.of<SearchViewModel>(context, listen: false);
+          provider.clearFoodList();
         },
         icon: Icon(
           Icons.save,
