@@ -2,7 +2,12 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
+import 'package:softito_final_project/components/search_page/grid_view_page.dart';
+import 'package:softito_final_project/components/search_page/meal_name_change.dart';
+import 'package:softito_final_project/components/search_page/serach_bar.dart';
 import 'package:softito_final_project/const_files/const_variable.dart';
+import 'package:softito_final_project/viewmodel/search_view_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -14,6 +19,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
+    List food = context.watch<SearchViewModel>().food;
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -23,32 +29,65 @@ class _SearchPageState extends State<SearchPage> {
               Padding(
                 padding: EdgeInsets.all(8),
               ),
-              Container(
-                padding: EdgeInsets.only(left: 30),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                child: TextField(
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                      labelText: 'Search',
-                      labelStyle: TextStyle(
-                        color: Colors.black,
-                      ),
-                      border: InputBorder.none,
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Image.asset(
-                          "assets/images/search.png",
-                          scale: 3,
-                        ),
-                      ),
-                    )),
-              ),
+              searchBar(),
               SizedBox(
                 height: 20,
+              ),
+              Visibility(
+                visible: food.length == 0 ? false : true,
+                child: Container(
+                  height: ConstVariable(context).screenHeight * 0.05,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: food.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return Container(
+                          padding: EdgeInsets.only(right: 5),
+                          child: Container(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CircleAvatar(
+                                  radius: 20.0,
+                                  backgroundImage: NetworkImage(
+                                      Faker().image.image(random: true)),
+                                  backgroundColor: Colors.transparent,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.grey[200],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(food[index]),
+                                      CloseButton(
+                                        color: Colors.red,
+                                        onPressed: () {
+                                          context
+                                              .read<SearchViewModel>()
+                                              .removeFood(index);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Container(
                   padding: EdgeInsets.only(left: 20),
@@ -59,98 +98,19 @@ class _SearchPageState extends State<SearchPage> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   )),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    padding: EdgeInsets.only(left: 10),
-                    width: ConstVariable(context).screenWidth * 0.6,
-                    child: TextField(
-                        controller: TextEditingController(text: "Other"),
-                        cursorColor: Colors.black,
-                        decoration: InputDecoration(
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: InputBorder.none,
-                          suffixIcon: Padding(
-                            padding: EdgeInsets.only(right: 10),
-                            child: Image.asset(
-                              "assets/images/pen.png",
-                              scale: 3,
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(15),
-                height: ConstVariable(context).screenHeight * 0.7,
-                child: GridView.builder(
-                  itemCount: 10,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 4 / 5, crossAxisCount: 2),
-                  itemBuilder: (_, index) => Container(
-                    child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shadowColor: Colors.black,
-                      color: Colors.grey[300],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                    Faker().image.image(random: true)),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text("Onion"),
-                            Text("Claroies"),
-                            Text("Onion"),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Container(
-                                  height: ConstVariable(context).screenHeight *
-                                      0.04,
-                                  width:
-                                      ConstVariable(context).screenWidth * 0.1,
-                                  color: Colors.purple,
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      )),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              ChangeMealName(),
+              GridViewPage(),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.purple,
+        onPressed: () {},
+        icon: Icon(
+          Icons.save,
+        ),
+        label: Text("Save"),
       ),
     );
   }
