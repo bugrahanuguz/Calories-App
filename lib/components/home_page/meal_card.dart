@@ -18,34 +18,57 @@ class MealCard extends StatelessWidget {
       child: ListView.builder(
         itemCount: meal.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            child: Card(
-              color: Colors.grey.shade300,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            meal[index],
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
-                          Text(calories[index]),
-                        ],
+          return GestureDetector(
+            onTap: () => showDialog(
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(meal[index]),
+                  content: Text('Onion'),
+                  actions: <Widget>[
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: Theme.of(context).textTheme.labelLarge,
                       ),
+                      child: const Text('Close'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                    _addButton(context)
-                  ]),
+                  ],
+                );
+              },
+              context: context,
+            ),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
+              child: Card(
+                color: Colors.grey.shade300,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              meal[index],
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                            Text(calories[index]),
+                          ],
+                        ),
+                      ),
+                      _addButton(context)
+                    ]),
+              ),
             ),
           );
         },
@@ -53,17 +76,6 @@ class MealCard extends StatelessWidget {
     );
   }
 }
-
-// List meals = [
-//   "BREAKFAST",
-//   "LUNCH",
-//   "DINNER",
-// ];
-// List calories = [
-//   "350 kcal",
-//   "420 kcal",
-//   "200 kcal",
-// ];
 
 Widget _addButton(BuildContext context) => ElevatedButton(
       onPressed: () {
