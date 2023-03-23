@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:softito_final_project/components/login__register_page/forgot_password.dart';
-import 'package:softito_final_project/components/login__register_page/login_google.dart';
-import 'package:softito_final_project/components/login__register_page/login_to_register.dart';
 import 'package:softito_final_project/components/login__register_page/signButton.dart';
 import 'package:softito_final_project/components/login__register_page/text_field.dart';
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
-import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/login_page.dart';
-
-import '../components/login__register_page/or_continue_with.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -21,6 +15,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     signUserIn() async {
       print('basıldı');
       if (usernameController.text != null && passwordController.text != null) {

@@ -9,7 +9,7 @@ import 'package:softito_final_project/models/nutritions_model.dart';
 import 'package:softito_final_project/models/user_model.dart';
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
-import 'package:softito_final_project/viewmodel/users_view_model.dart';
+import 'package:softito_final_project/viewmodel/foods_view_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -113,9 +113,12 @@ class _SearchPageState extends State<SearchPage> {
         onPressed: () async {
           for (int i = 0; i < foodList.length; i++) {
             var provider =
-                await Provider.of<UserViewModel>(context, listen: false);
-            provider.setList(foodList[i], user);
+                await Provider.of<FoodViewModel>(context, listen: false);
+            provider.setFoods(foodList[i], user);
           }
+          var provider =
+              await Provider.of<SearchViewModel>(context, listen: false);
+          provider.clearFoodList();
         },
         icon: Icon(
           Icons.save,

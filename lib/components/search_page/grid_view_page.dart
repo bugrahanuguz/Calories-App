@@ -40,12 +40,6 @@ class _GridViewPageState extends State<GridViewPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(Faker().image.image(random: true)),
-                    ),
-                  ),
                   SizedBox(
                     height: 5,
                   ),
@@ -54,6 +48,11 @@ class _GridViewPageState extends State<GridViewPage> {
                   Text("Serving Size:" +
                       " " +
                       list[index].servingSizeG.toString()),
+                  Text("Protein:" + " " + list[index].proteinG.toString()),
+                  Text("Carb:" +
+                      " " +
+                      list[index].carbohydratesTotalG.toString()),
+                  Text("Fat:" + " " + list[index].fatTotalG.toString()),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: ClipRRect(
@@ -66,7 +65,7 @@ class _GridViewPageState extends State<GridViewPage> {
                             onPressed: () {
                               context
                                   .read<SearchViewModel>()
-                                  .addFoodList(list[index]);
+                                  .addFoodList(list[index], index);
                             },
                             child: Icon(
                               Icons.add,

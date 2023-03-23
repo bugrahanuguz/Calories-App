@@ -41,54 +41,56 @@ class LoginPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
-      body: SafeArea(
-        child: Center(
-          child: Column(children: [
-            const SizedBox(height: 50),
-            //logo
-            const Icon(
-              Icons.lock,
-              size: 100,
-            ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(children: [
+              const SizedBox(height: 50),
+              //logo
+              const Icon(
+                Icons.lock,
+                size: 100,
+              ),
 
-            const SizedBox(height: 50),
-            //username
-            LoginTextField(
-                controller: usernameController,
-                hintText: "Username",
-                obscureText: false),
-            //password
-            const SizedBox(height: 50),
-            LoginTextField(
-                controller: passwordController,
-                hintText: "password",
-                obscureText: true),
+              const SizedBox(height: 50),
+              //username
+              LoginTextField(
+                  controller: usernameController,
+                  hintText: "Username",
+                  obscureText: false),
+              //password
+              const SizedBox(height: 50),
+              LoginTextField(
+                  controller: passwordController,
+                  hintText: "password",
+                  obscureText: true),
 
-            //Forgot password
-            const SizedBox(height: 10),
-            ForgotPassword(
-              text: 'Forgot password?',
-            ),
+              //Forgot password
+              const SizedBox(height: 10),
+              ForgotPassword(
+                text: 'Forgot password?',
+              ),
 
-            //login button
-            const SizedBox(height: 10),
-            SignButton(ontap: signUserIn, text: 'Sign in'),
+              //login button
+              const SizedBox(height: 10),
+              SignButton(ontap: signUserIn, text: 'Sign in'),
 
-            //or continue with
-            const SizedBox(height: 50),
-            const OrContinueWith(text: 'Or continue with'),
-            //google button
-            const SizedBox(height: 50),
-            const LoginGoogle(
-              imagePath: 'assets/images/google_icon.png',
-            ),
+              //or continue with
+              const SizedBox(height: 50),
+              const OrContinueWith(text: 'Or continue with'),
+              //google button
+              const SizedBox(height: 50),
+              const LoginGoogle(
+                imagePath: 'assets/images/google_icon.png',
+              ),
 
-            //not a member? register here
-            const SizedBox(height: 50),
-            LoginToRegister(
-              ontap: toRegister,
-            )
-          ]),
+              //not a member? register here
+              const SizedBox(height: 50),
+              LoginToRegister(
+                ontap: toRegister,
+              )
+            ]),
+          ),
         ),
       ),
     );
