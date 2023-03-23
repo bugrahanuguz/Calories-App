@@ -54,10 +54,9 @@ class _LoginPageState extends State<LoginPage> {
                 passwordController.text != null) {
               var provider =
                   Provider.of<LoginViewModel>(context, listen: false);
-              await provider.signUp(
+              await provider.login(
                   usernameController.text, passwordController.text);
-              if (provider.isRegister) {
-                provider.setRegister(false);
+              if (provider.isLogin) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomePage()));
               }

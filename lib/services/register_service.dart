@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class RegisterService {
   String _baseUrl =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
-  String apiKey = "";
+  String apiKey = "AIzaSyCjZEsHcXVg-q679J-2prcl58aLbAtlw3w";
   Uri getUrl() => Uri.parse("$_baseUrl$apiKey");
   bool _isRegister = false;
   bool get isRegister => _isRegister;
