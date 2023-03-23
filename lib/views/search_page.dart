@@ -1,13 +1,15 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:softito_final_project/components/search_page/grid_view_page.dart';
 import 'package:softito_final_project/components/search_page/meal_name_change.dart';
 import 'package:softito_final_project/components/search_page/serach_bar.dart';
 import 'package:softito_final_project/const_files/const_variable.dart';
+import 'package:softito_final_project/models/nutritions_model.dart';
+import 'package:softito_final_project/models/user_model.dart';
+import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
+import 'package:softito_final_project/viewmodel/users_view_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -19,7 +21,9 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    List food = context.watch<SearchViewModel>().food;
+    //List food = context.watch<SearchViewModel>().food;
+    List<Nutritions> foodList = context.watch<SearchViewModel>().foodList;
+    UserModel user = context.read<LoginViewModel>().user;
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -34,12 +38,12 @@ class _SearchPageState extends State<SearchPage> {
                 height: 20,
               ),
               Visibility(
-                visible: food.length == 0 ? false : true,
+                visible: foodList.length == 0 ? false : true,
                 child: Container(
                   height: ConstVariable(context).screenHeight * 0.05,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: food.length,
+                      itemCount: foodList.length,
                       itemBuilder: (BuildContext context, index) {
                         return Container(
                           padding: EdgeInsets.only(right: 5),
@@ -67,7 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      Text(food[index]),
+                                      Text(foodList[index].name.toString()),
                                       CloseButton(
                                         color: Colors.red,
                                         onPressed: () {
@@ -106,7 +110,13 @@ class _SearchPageState extends State<SearchPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.purple,
-        onPressed: () {},
+        onPressed: () async {
+          for (int i = 0; i < foodList.length; i++) {
+            var provider =
+                await Provider.of<UserViewModel>(context, listen: false);
+            provider.setList(foodList[i], user);
+          }
+        },
         icon: Icon(
           Icons.save,
         ),

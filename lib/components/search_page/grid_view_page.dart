@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
+import 'package:softito_final_project/viewmodel/nutritions_view_model.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
 
 import '../../const_files/const_variable.dart';
@@ -18,11 +19,12 @@ class _GridViewPageState extends State<GridViewPage> {
   @override
   Widget build(BuildContext context) {
     List food = context.watch<SearchViewModel>().food;
+    var list = context.watch<NutritionViewModel>().nutrition_list;
     return Container(
       margin: EdgeInsets.all(15),
       height: ConstVariable(context).screenHeight * 0.7,
       child: GridView.builder(
-        itemCount: 10,
+        itemCount: list.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: 4 / 5, crossAxisCount: 2),
         itemBuilder: (_, index) => Container(
@@ -47,9 +49,11 @@ class _GridViewPageState extends State<GridViewPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  Text("Onion"),
-                  Text("Claroies"),
-                  Text("Onion"),
+                  Text("Food:" + " " + list[index].name.toString()),
+                  Text("Calories:" + " " + list[index].calories.toString()),
+                  Text("Serving Size:" +
+                      " " +
+                      list[index].servingSizeG.toString()),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: ClipRRect(
@@ -60,7 +64,9 @@ class _GridViewPageState extends State<GridViewPage> {
                         color: Colors.purple,
                         child: TextButton(
                             onPressed: () {
-                              context.read<SearchViewModel>().addFood("onion");
+                              context
+                                  .read<SearchViewModel>()
+                                  .addFoodList(list[index]);
                             },
                             child: Icon(
                               Icons.add,

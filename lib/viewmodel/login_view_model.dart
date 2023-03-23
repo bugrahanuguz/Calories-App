@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:softito_final_project/services/register_service.dart';
 
@@ -18,6 +16,12 @@ class LoginViewModel extends ChangeNotifier {
   bool _isRegister = false;
   bool get isRegister => _isRegister;
 
+  String? _localId;
+  String get localId => _localId!;
+
+  setLocalId(String localId) {
+    _localId = localId;
+  }
 
   setRegister(bool value) {
     _isRegister = value;

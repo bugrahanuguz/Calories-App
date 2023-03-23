@@ -6,7 +6,6 @@ import 'package:softito_final_project/const_files/const_variable.dart';
 class LoginService {
   String _firebaseloginUrl = ConstVariable.firebase_login_api;
 
-
   String apiKey = ConstVariable.firebase_api_key;
   Uri getUrl() => Uri.parse("$_firebaseloginUrl$apiKey");
 
@@ -20,7 +19,7 @@ class LoginService {
       var data = json.decode(response.body);
       user.id = data["localId"];
       _isLogin = true;
-      print(data);
+      print(user.id);
       return user;
     } else {
       return user;
