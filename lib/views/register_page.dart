@@ -7,16 +7,17 @@ import 'package:softito_final_project/components/login__register_page/signButton
 import 'package:softito_final_project/components/login__register_page/text_field.dart';
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/views/home_page.dart';
-import 'package:softito_final_project/views/register_page.dart';
+import 'package:softito_final_project/views/login_page.dart';
 
 import '../components/login__register_page/or_continue_with.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  RegisterPage({super.key});
 
   final usernameController = TextEditingController();
 
   final passwordController = TextEditingController();
+  final passwordCheckController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,71 +25,50 @@ class LoginPage extends StatelessWidget {
       print('basıldı');
       if (usernameController.text != null && passwordController.text != null) {
         var provider = Provider.of<LoginViewModel>(context, listen: false);
-        await provider.login(usernameController.text, passwordController.text);
+        await provider.signUp(usernameController.text, passwordController.text);
         print(usernameController.text + passwordController.text);
-        print(provider.isLogin);
-        if (provider.isLogin) {
+        print(provider.isRegister);
+        if (provider.isRegister) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
         }
       }
-    }
-
-    toRegister() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
     }
 
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
-        child: Center(
-          child: Column(children: [
-            const SizedBox(height: 50),
-            //logo
-            const Icon(
-              Icons.lock,
-              size: 100,
-            ),
+        child: Padding(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+          child: Center(
+            child: Column(children: [
+              const SizedBox(height: 50),
+              //logo
+              const Icon(
+                Icons.app_registration,
+                size: 100,
+              ),
 
-            const SizedBox(height: 50),
-            //username
-            LoginTextField(
-                controller: usernameController,
-                hintText: "Username",
-                obscureText: false),
-            //password
-            const SizedBox(height: 50),
-            LoginTextField(
-                controller: passwordController,
-                hintText: "password",
-                obscureText: true),
+              const SizedBox(height: 50),
+              //username
+              LoginTextField(
+                  controller: usernameController,
+                  hintText: "Username",
+                  obscureText: false),
+              //password
+              const SizedBox(height: 50),
+              LoginTextField(
+                  controller: passwordController,
+                  hintText: "password",
+                  obscureText: true),
 
-            //Forgot password
-            const SizedBox(height: 10),
-            ForgotPassword(
-              text: 'Forgot password?',
-            ),
+              const SizedBox(height: 50),
+              SignButton(ontap: signUserIn, text: 'Sign Up'),
 
-            //login button
-            const SizedBox(height: 10),
-            SignButton(ontap: signUserIn, text: 'Sign in'),
-
-            //or continue with
-            const SizedBox(height: 50),
-            const OrContinueWith(text: 'Or continue with'),
-            //google button
-            const SizedBox(height: 50),
-            const LoginGoogle(
-              imagePath: 'assets/images/google_icon.png',
-            ),
-
-            //not a member? register here
-            const SizedBox(height: 50),
-            LoginToRegister(
-              ontap: toRegister,
-            )
-          ]),
+              //password check
+            ]),
+          ),
         ),
       ),
     );

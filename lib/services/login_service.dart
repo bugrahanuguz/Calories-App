@@ -6,7 +6,7 @@ class LoginService {
   String _baseUrl =
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
 
-  String apiKey = "AIzaSyCjZEsHcXVg-q679J-2prcl58aLbAtlw3w";
+  String apiKey = "AIzaSyBjnhuzdsJfw-s6k7xgQ2bZ4pwGeAJJuTM";
   Uri getUrl() => Uri.parse("$_baseUrl$apiKey");
   bool _isLogin = false;
   bool get isLogin => _isLogin;
