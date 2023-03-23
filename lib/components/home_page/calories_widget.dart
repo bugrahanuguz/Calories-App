@@ -25,7 +25,8 @@ class CaloriesWidget extends StatelessWidget {
                 Text("${protein.toInt()}g"),
               ],
             ),
-            context),
+            context,
+            protein.toInt()),
         _container(
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +35,8 @@ class CaloriesWidget extends StatelessWidget {
                 Text("${carb.toInt()}g"),
               ],
             ),
-            context),
+            context,
+            carb.toInt()),
         _container(
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,17 +45,18 @@ class CaloriesWidget extends StatelessWidget {
                 Text("${fat.toInt()}g"),
               ],
             ),
-            context)
+            context,
+            fat.toInt())
       ],
     );
   }
 }
 
-Widget _container(Widget child, BuildContext context) => Container(
+Widget _container(Widget child, BuildContext context, int val) => Container(
       width: MediaQuery.of(context).size.width * 0.18,
       height: MediaQuery.of(context).size.height * 0.055,
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: val < 100 ? Colors.grey.shade200 : Colors.purple,
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(10),
       ),
