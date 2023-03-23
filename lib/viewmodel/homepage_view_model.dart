@@ -11,6 +11,7 @@ class HomepageViewModel extends ChangeNotifier {
     "420 kcal",
     "200 kcal",
   ];
+
   addMeal() {
     meals.add("OTHER");
     calories.add("0 kcal");
