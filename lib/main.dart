@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:softito_final_project/viewmodel/homepage_view_model.dart';
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/viewmodel/nutritions_view_model.dart';
-import 'package:softito_final_project/viewmodel/search_view_model.dart';
+
+import 'package:softito_final_project/viewmodel/reset_password.dart';
+
 import 'package:softito_final_project/viewmodel/users_view_model.dart';
 import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/login_page.dart';
@@ -24,7 +26,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserViewModel()),
         ChangeNotifierProvider(create: (context) => LoginViewModel()),
         ChangeNotifierProvider(create: (context) => HomepageViewModel()),
+
+        ChangeNotifierProvider(create: (context) => ResetPasswordViewModel())
+
         ChangeNotifierProvider(create: (context) => SearchViewModel()),
+
 
       ],
       child: MaterialApp(
@@ -33,14 +39,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-
-
-
-
-
         home: LoginPage(),
-
-
       ),
     );
   }
