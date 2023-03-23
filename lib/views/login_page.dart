@@ -14,9 +14,9 @@ import '../components/login__register_page/or_continue_with.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  final usernameController = TextEditingController();
+  final usernameController = TextEditingController(text: "bugra@bugra.com");
 
-  final passwordController = TextEditingController();
+  final passwordController = TextEditingController(text: "123456");
 
   @override
   Widget build(BuildContext context) {
