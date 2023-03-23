@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:softito_final_project/views/search_page.dart';
 
 import '../../viewmodel/homepage_view_model.dart';
 
@@ -43,7 +44,7 @@ class MealCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    _addButton()
+                    _addButton(context)
                   ]),
             ),
           );
@@ -64,8 +65,11 @@ class MealCard extends StatelessWidget {
 //   "200 kcal",
 // ];
 
-Widget _addButton() => ElevatedButton(
-      onPressed: () {},
+Widget _addButton(BuildContext context) => ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SearchPage()));
+      },
       child: const Icon(Icons.add, color: Colors.purple),
       style: ElevatedButton.styleFrom(
           shape: const CircleBorder(side: BorderSide(color: Colors.purple)),
