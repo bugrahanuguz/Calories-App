@@ -17,20 +17,22 @@ class _HomePageState extends State<HomePage> {
     //UserModel user = context.watch<UserViewModel>().user;
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-          const Text(
-            "Today",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
-          ),
-          const CircularProgress(),
-          const CaloriesWidget(),
-          const HomePageButtons(),
-          const MealCard(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
+            ),
+            const Text(
+              "Today",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+            ),
+            const CircularProgress(),
+            const CaloriesWidget(),
+            const HomePageButtons(),
+            const MealCard(),
+          ],
+        ),
       ),
     );
   }
