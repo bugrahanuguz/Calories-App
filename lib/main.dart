@@ -5,6 +5,7 @@ import 'package:softito_final_project/viewmodel/nutritions_view_model.dart';
 import 'package:softito_final_project/viewmodel/users_view_model.dart';
 import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/login_page.dart';
+import 'package:softito_final_project/views/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const LoginPage(),
+        home: const SearchPage(),
       ),
     );
   }
