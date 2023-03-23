@@ -17,20 +17,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    Future.microtask(() {
-      context.read<NutritionViewModel>().getNutrition();
-      context.read<UserViewModel>().getList();
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     //UserModel user = context.watch<UserViewModel>().user;
     return Scaffold(
       appBar: AppBar(),
-
       body: Column(
         children: [
           SizedBox(
@@ -45,7 +35,6 @@ class _HomePageState extends State<HomePage> {
           const HomePageButtons(),
           const MealCard(),
         ],
-
       ),
     );
   }

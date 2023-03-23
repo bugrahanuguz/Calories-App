@@ -10,8 +10,8 @@ class NutritionViewModel extends ChangeNotifier {
   List<Nutritions> _nutrition_list = [];
   List<Nutritions> get nutrition_list => _nutrition_list;
 
-  Future<void> getNutrition() async {
-    final response = await _service.getNutritions();
+  Future<void> getNutrition(String query) async {
+    final response = await _service.getNutritions(query);
     _nutrition_list = response;
     notifyListeners();
   }

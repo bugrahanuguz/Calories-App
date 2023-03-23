@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
+import 'package:softito_final_project/viewmodel/nutritions_view_model.dart';
 
 class searchBar extends StatelessWidget {
   const searchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final searchController = TextEditingController();
     return Container(
       padding: EdgeInsets.only(left: 30),
       decoration: BoxDecoration(
@@ -15,6 +18,7 @@ class searchBar extends StatelessWidget {
       ),
       margin: EdgeInsets.symmetric(horizontal: 15),
       child: TextField(
+          controller: searchController,
           cursorColor: Colors.black,
           decoration: InputDecoration(
             labelText: 'Search',
@@ -24,9 +28,17 @@ class searchBar extends StatelessWidget {
             border: InputBorder.none,
             suffixIcon: Padding(
               padding: EdgeInsets.only(right: 10),
-              child: Image.asset(
-                "assets/images/search.png",
-                scale: 3,
+              child: GestureDetector(
+                onTap: () {
+                  print("ok");
+                  var provider =
+                      Provider.of<NutritionViewModel>(context, listen: false);
+                  provider.getNutrition(searchController.text);
+                },
+                child: Image.asset(
+                  "assets/images/search.png",
+                  scale: 3,
+                ),
               ),
             ),
           )),

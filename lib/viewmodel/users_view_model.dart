@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:softito_final_project/models/nutritions_model.dart';
 import 'package:softito_final_project/models/user_model.dart';
 import 'package:softito_final_project/services/user_service.dart';
 
 class UserViewModel extends ChangeNotifier {
   final UserService services = UserService();
-  List<UserModel> _users = [];
-  List<UserModel> get users => _users;
-  UserModel? _user;
-  UserModel get user => _user!;
+  List<Nutritions> _users = [];
+  List<Nutritions> get users => _users;
+  Nutritions? _user;
+  Nutritions get user => _user!;
+  UserModel? _currentUser;
+  UserModel get currentUser => _currentUser!;
 
-  setUser(UserModel u) {
+  setUser(Nutritions u) {
     _user = u;
     notifyListeners();
   }
 
-  Future getList() async {
-    final response = await services.getUsers();
-    _users = response;
-    notifyListeners();
-  }
-
-  Future setList(String name, String email) async {
-    UserModel newUser = UserModel(name: name, email: email);
-    final response = await services.postUser(newUser);
+  Future setList(Nutritions nutritions, UserModel currentUser) async {
+    _currentUser = currentUser;
+    Nutritions newUser = Nutritions(
+        name: nutritions.name,
+        calories: nutritions.calories,
+        proteinG: nutritions.proteinG,
+        carbohydratesTotalG: nutritions.carbohydratesTotalG,
+        fatTotalG: nutritions.fatTotalG,
+        servingSizeG: nutritions.servingSizeG);
+    final response = await services.postUser(newUser, currentUser);
     _user = response;
-    getList();
     notifyListeners();
   }
 }
