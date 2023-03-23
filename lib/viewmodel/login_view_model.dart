@@ -17,6 +17,8 @@ class LoginViewModel extends ChangeNotifier {
   bool get isLogin => _isLogin;
   bool _isRegister = false;
   bool get isRegister => _isRegister;
+
+
   setRegister(bool value) {
     _isRegister = value;
     notifyListeners();

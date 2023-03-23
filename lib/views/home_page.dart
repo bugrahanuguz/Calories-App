@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     //UserModel user = context.watch<UserViewModel>().user;
     return Scaffold(
       appBar: AppBar(),
+
       body: Column(
         children: [
           SizedBox(
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
           const HomePageButtons(),
           const MealCard(),
         ],
+
       ),
     );
   }

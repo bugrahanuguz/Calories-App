@@ -1,13 +1,14 @@
 import 'dart:convert';
 
+import 'package:softito_final_project/const_files/const_variable.dart';
+
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterService {
-  String _baseUrl =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
-  String apiKey = "AIzaSyCjZEsHcXVg-q679J-2prcl58aLbAtlw3w";
-  Uri getUrl() => Uri.parse("$_baseUrl$apiKey");
+  String _firebseRegisterUrl = ConstVariable.firebase_register_api;
+  String apiKey = ConstVariable.firebase_api_key;
+  Uri getUrl() => Uri.parse("$_firebseRegisterUrl$apiKey");
   bool _isRegister = false;
   bool get isRegister => _isRegister;
 

@@ -1,12 +1,12 @@
 import 'dart:convert';
+import 'package:softito_final_project/const_files/const_variable.dart';
 import 'package:softito_final_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
-const String _baseUrl =
-    "https://test-project-cc38e-default-rtdb.europe-west1.firebasedatabase.app";
+String _userApi = ConstVariable.firebase_user_api;
 
 class UserService {
-  Uri getUrl(String endpoint) => Uri.parse("$_baseUrl/$endpoint.json");
+  Uri getUrl(String endpoint) => Uri.parse("$_userApi/$endpoint.json");
 
   Future<List<UserModel>> getUsers() async {
     http.Response response = await http.get(getUrl("users"));
