@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:softito_final_project/services/register_service.dart';
-
 import '../models/user_model.dart';
 import '../services/login_service.dart';
 
@@ -15,7 +14,6 @@ class LoginViewModel extends ChangeNotifier {
   bool get isLogin => _isLogin;
   bool _isRegister = false;
   bool get isRegister => _isRegister;
-
   String? _localId;
   String get localId => _localId!;
 

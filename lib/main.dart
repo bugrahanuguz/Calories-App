@@ -5,7 +5,7 @@ import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/viewmodel/nutritions_view_model.dart';
 import 'package:softito_final_project/viewmodel/reset_password.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
-import 'package:softito_final_project/viewmodel/users_view_model.dart';
+import 'package:softito_final_project/viewmodel/foods_view_model.dart';
 import 'package:softito_final_project/views/login_page.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => NutritionViewModel()),
-        ChangeNotifierProvider(create: (context) => UserViewModel()),
+        ChangeNotifierProvider(create: (context) => FoodViewModel()),
         ChangeNotifierProvider(create: (context) => LoginViewModel()),
         ChangeNotifierProvider(create: (context) => HomepageViewModel()),
         ChangeNotifierProvider(create: (context) => ResetPasswordViewModel()),

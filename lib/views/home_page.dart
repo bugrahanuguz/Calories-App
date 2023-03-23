@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:softito_final_project/viewmodel/nutritions_view_model.dart';
-import 'package:softito_final_project/viewmodel/users_view_model.dart';
 import '../components/home_page/buttons.dart';
 import '../components/home_page/calories_widget.dart';
 import '../components/home_page/circular_progress.dart';
 import '../components/home_page/meal_card.dart';
-import '../components/nutrition_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -14,7 +14,7 @@ class MealCard extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.all(15),
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.35,
       child: ListView.builder(
         itemCount: meal.length,
         itemBuilder: (BuildContext context, int index) {

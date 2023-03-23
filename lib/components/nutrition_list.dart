@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../models/nutritions_model.dart';
 import '../models/user_model.dart';
 import '../viewmodel/nutritions_view_model.dart';
-import '../viewmodel/users_view_model.dart';
+import '../viewmodel/foods_view_model.dart';
 
 // class NutritionListWidget extends StatelessWidget {
 //   const NutritionListWidget({super.key});
