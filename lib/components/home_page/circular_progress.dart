@@ -17,8 +17,11 @@ class CircularProgress extends StatelessWidget {
         radius: 95.0,
         lineWidth: 20.0,
         percent: cal < 1000 ? cal / 1000 : 1,
-        center: new Text("1000/${cal.toInt()} kcal"),
-        progressColor: Colors.purple,
+        center: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [new Text("${cal.toInt()} kcal"), Icon(Icons.bolt_rounded)],
+        ),
+        progressColor: Color(0xffC92C6D),
       ),
     );
   }
