@@ -17,15 +17,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //UserModel user = context.watch<UserViewModel>().user;
     return Scaffold(
+      backgroundColor: Color(0xffFFEAEA),
       appBar: AppBar(
-        title: Text("HomePage"),
-        backgroundColor: Colors.purple,
+        title: Text(
+          "HomePage",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Color(0xff609EA2),
         leading: GestureDetector(
             onTap: () {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => LoginPage()));
             },
-            child: Icon(Icons.power_settings_new)),
+            child: Icon(
+              Icons.power_settings_new,
+              color: Colors.black,
+            )),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -39,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const CircularProgress(),
             const CaloriesWidget(),
-            const HomePageButtons(),
+            //const HomePageButtons(),
             const MealCard(),
           ],
         ),

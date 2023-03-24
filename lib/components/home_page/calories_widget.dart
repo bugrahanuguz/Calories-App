@@ -21,8 +21,11 @@ class CaloriesWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(nutritionsValue[0]),
-                Text("${protein.toInt()}g"),
+                Text(
+                  nutritionsValue[0],
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text("${protein.toInt()} g"),
               ],
             ),
             context,
@@ -31,8 +34,9 @@ class CaloriesWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(nutritionsValue[1]),
-                Text("${carb.toInt()}g"),
+                Text(nutritionsValue[1],
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text("${carb.toInt()} g"),
               ],
             ),
             context,
@@ -41,8 +45,9 @@ class CaloriesWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(nutritionsValue[2]),
-                Text("${fat.toInt()}g"),
+                Text(nutritionsValue[2],
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text("${fat.toInt()} g"),
               ],
             ),
             context,

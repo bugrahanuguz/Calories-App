@@ -127,7 +127,7 @@ class _GridViewPageState extends State<GridViewPage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.purple,
+                        color: Color(0xffC92C6D),
                       ),
                       height: ConstVariable(context).screenHeight * 0.06,
                       width: ConstVariable(context).screenWidth * 0.12,

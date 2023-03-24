@@ -38,7 +38,7 @@ class RegisterPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Color(0xffFFEAEA),
       body: SafeArea(
         child: Center(
           child: Column(children: [
@@ -50,13 +50,13 @@ class RegisterPage extends StatelessWidget {
             //username
             LoginTextField(
                 controller: usernameController,
-                hintText: "Username",
+                hintText: "Email",
                 obscureText: false),
             //password
             const SizedBox(height: 50),
             LoginTextField(
                 controller: passwordController,
-                hintText: "password",
+                hintText: "Password",
                 obscureText: true),
             const SizedBox(height: 10),
             HaveAccount(

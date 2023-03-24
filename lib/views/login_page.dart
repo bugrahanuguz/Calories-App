@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Color(0xffFFEAEA),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
@@ -65,13 +65,13 @@ class LoginPage extends StatelessWidget {
               //username
               LoginTextField(
                   controller: usernameController,
-                  hintText: "Username",
+                  hintText: "E-mail",
                   obscureText: false),
               //password
               const SizedBox(height: 50),
               LoginTextField(
                   controller: passwordController,
-                  hintText: "password",
+                  hintText: "Password",
                   obscureText: true),
 
               //Forgot password

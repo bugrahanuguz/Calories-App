@@ -26,10 +26,14 @@ class LoginTextField extends StatelessWidget {
         decoration: InputDecoration(
             hintText: hintText,
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Color(0xff609EA2)),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(
+                color: Color(0xffC92C6D),
+              ),
             ),
             fillColor: Colors.grey.shade200,
             filled: true),

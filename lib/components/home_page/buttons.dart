@@ -18,7 +18,7 @@ class HomePageButtons extends StatelessWidget {
         child: Text("ADD MEAL"),
         style: ButtonStyle(
             fixedSize: MaterialStatePropertyAll(Size(150, 40)),
-            backgroundColor: MaterialStatePropertyAll(Colors.purple),
+            backgroundColor: MaterialStatePropertyAll(Color(0xffC92C6D)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
