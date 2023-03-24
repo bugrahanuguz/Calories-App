@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:softito_final_project/const_files/const_variable.dart';
 import 'package:softito_final_project/models/nutritions_model.dart';
 import 'package:softito_final_project/viewmodel/foods_view_model.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
@@ -7,9 +8,14 @@ import 'package:softito_final_project/views/search_page.dart';
 
 import '../../viewmodel/homepage_view_model.dart';
 
-class MealCard extends StatelessWidget {
+class MealCard extends StatefulWidget {
   const MealCard({super.key});
 
+  @override
+  State<MealCard> createState() => _MealCardState();
+}
+
+class _MealCardState extends State<MealCard> {
   @override
   Widget build(BuildContext context) {
     List meal = context.watch<HomepageViewModel>().meals;
@@ -19,6 +25,12 @@ class MealCard extends StatelessWidget {
     List<Nutritions> launch = context.watch<FoodViewModel>().lunch;
     List<Nutritions> dinner = context.watch<FoodViewModel>().dinner;
     List<List<Nutritions>> meal_names = [breakfast, launch, dinner];
+
+    var p = Provider.of<SearchViewModel>(context, listen: false);
+    var pr = Provider.of<FoodViewModel>(context, listen: false);
+    p.clearCal();
+    p.getBreakfastCall(breakfast, launch, dinner);
+    List<double> cal_meal = [p.breakFastCal, p.lunchCal, p.dinnerCal];
     return Container(
       margin: const EdgeInsets.all(20),
       height: MediaQuery.of(context).size.height * 0.4,
@@ -27,39 +39,84 @@ class MealCard extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              var p = Provider.of<SearchViewModel>(context, listen: false);
-              var pr = Provider.of<FoodViewModel>(context, listen: false);
               p.sendButtonName(index);
-
               showDialog(
                 barrierColor: Colors.purple.shade100,
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text(meal[index]),
                     content: Container(
-                      width: 200,
-                      height: 200,
-                      child: ListView.builder(
-                        shrinkWrap: false,
-                        itemCount: meal_names[index].length == 0
-                            ? 0
-                            : meal_names[index].length,
-                        itemBuilder: (BuildContext context, index2) {
-                          return Row(
+                      height: 250,
+                      child: Column(
+                        children: [
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(meal_names[index][index2].name.toString()),
-                              Text(meal_names[index][index2]
-                                      .servingSizeG
-                                      .toString() +
-                                  " g"),
-                              Text(meal_names[index][index2]
-                                  .calories
-                                  .toString()),
-                              Text("Total: " + p.breakFastCal.toString()),
+                              Text(
+                                "Food",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
+                              Text(
+                                "Serve Size",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
+                              Text(
+                                "Calories",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
                             ],
-                          );
-                        },
+                          ),
+                          Container(
+                            height: ConstVariable(context).screenHeight * 0.3,
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 200,
+                                  height: 150,
+                                  child: ListView.builder(
+                                    shrinkWrap: false,
+                                    itemCount: meal_names[index].length == 0
+                                        ? 0
+                                        : meal_names[index].length,
+                                    itemBuilder:
+                                        (BuildContext context, index2) {
+                                      return Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(meal_names[index][index2]
+                                                  .name
+                                                  .toString()),
+                                              Text(meal_names[index][index2]
+                                                      .servingSizeG
+                                                      .toString() +
+                                                  " g"),
+                                              Text(meal_names[index][index2]
+                                                  .calories
+                                                  .toString()),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                                Text("Total: " +
+                                    cal_meal[index]
+                                        .toStringAsFixed(1)
+                                        .toString()),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     actions: <Widget>[
@@ -69,6 +126,7 @@ class MealCard extends StatelessWidget {
                         ),
                         child: const Text('Close'),
                         onPressed: () {
+                          p.clearCal();
                           Navigator.of(context).pop();
                         },
                       ),
@@ -111,7 +169,10 @@ class MealCard extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Text(calories[index]),
+                            Text(calories[index] +
+                                "/" +
+                                cal_meal[index].toInt().toString() +
+                                "kcal"),
                           ],
                         ),
                       ),

@@ -36,6 +36,7 @@ class LoginPage extends StatelessWidget {
           prov.getLunch(provider.user);
           prov.getDinner(provider.user);
           print(prov.breakfast);
+
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         }

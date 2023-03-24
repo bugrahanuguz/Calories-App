@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:softito_final_project/viewmodel/foods_view_model.dart';
+import 'package:softito_final_project/viewmodel/search_view_model.dart';
 import 'package:softito_final_project/views/login_page.dart';
 import '../components/home_page/buttons.dart';
 import '../components/home_page/calories_widget.dart';
