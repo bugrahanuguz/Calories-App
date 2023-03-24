@@ -25,15 +25,26 @@ class RegisterPage extends StatelessWidget {
 
     signUserIn() async {
       print('basıldı');
-      if (usernameController.text != null && passwordController.text != null) {
+      if (usernameController.text != "" && passwordController.text != "") {
         var provider = Provider.of<LoginViewModel>(context, listen: false);
         await provider.signUp(usernameController.text, passwordController.text);
         print(usernameController.text + passwordController.text);
         print(provider.isRegister);
         if (provider.isRegister) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            "Registration Successful! You redirected to sign-in",
+            style: TextStyle(color: Colors.white),
+          )));
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => LoginPage()));
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+          "Please check your Email or Password! Please fill in the blanks.",
+          style: TextStyle(color: Colors.white),
+        )));
       }
     }
 
@@ -44,7 +55,7 @@ class RegisterPage extends StatelessWidget {
           child: Column(children: [
             const SizedBox(height: 50),
             //logo
-            Lottie.asset('assets/images/login.json', height: 100),
+            Lottie.asset('assets/images/loginn.json', height: 100),
 
             const SizedBox(height: 50),
             //username

@@ -41,7 +41,7 @@ class _MealCardState extends State<MealCard> {
             onTap: () {
               p.sendButtonName(index);
               showDialog(
-                barrierColor: Colors.purple.shade100,
+                barrierColor: Color(0xffFFEAEA),
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text(meal[index]),
