@@ -26,6 +26,12 @@ class ResetPassword extends StatelessWidget {
         if (provider.isRegister) {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => LoginPage()));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            "Please check your Email! Please fill in the blanks.",
+            style: TextStyle(color: Colors.white),
+          )));
         }
       }
     }

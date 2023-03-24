@@ -38,7 +38,19 @@ class LoginPage extends StatelessWidget {
           print(prov.breakfast);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            "Email or Password is incorrect! Please make sure you entered it correctly.",
+            style: TextStyle(color: Colors.white),
+          )));
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+          "Please check your Email or Password! Please fill in the blanks.",
+          style: TextStyle(color: Colors.white),
+        )));
       }
     }
 
@@ -57,7 +69,7 @@ class LoginPage extends StatelessWidget {
               //logo
 
               Lottie.asset(
-                'assets/images/login.json',
+                'assets/images/loginn.json',
                 height: 100,
               ),
 
