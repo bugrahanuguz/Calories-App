@@ -12,19 +12,45 @@ class SearchViewModel extends ChangeNotifier {
   double fat = 0;
   int buttonName = 0;
   double breakFastCal = 0;
+  double lunchCal = 0;
+  double dinnerCal = 0;
+  double totalCal = 0;
 
   addFood(String txt) {
     food.add(txt);
     notifyListeners();
   }
 
-  getBreakfastCall(){
-    breakFastCal =  foodService.breakfastcal;
+  getBreakfastCall(List<Nutritions> breakfast, List<Nutritions> lunch,
+      List<Nutritions> dinner) {
+    print("breakFastCal");
+    for (var i = 0; i < breakfast.length; i++) {
+      breakFastCal += breakfast[i].calories!;
+    }
+    for (var i = 0; i < lunch.length; i++) {
+      lunchCal += lunch[i].calories!;
+    }
+    for (var i = 0; i < dinner.length; i++) {
+      dinnerCal += dinner[i].calories!;
+    }
+    totalCal = dinnerCal + lunchCal + breakFastCal;
+    print(breakFastCal);
+    print(lunch);
+    print(dinner);
+
+    print("breakFastCal");
+
     notifyListeners();
   }
 
-  addFoodList(Nutritions nutrit, int index) {
+  clearCal() {
+    breakFastCal = 0;
+    lunchCal = 0;
+    dinnerCal = 0;
+    totalCal = 0;
+  }
 
+  addFoodList(Nutritions nutrit, int index) {
     foodList.add(nutrit);
     cal += double.parse(foodList[index].calories.toString());
     protein += double.parse(foodList[index].proteinG.toString());
