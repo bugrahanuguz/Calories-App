@@ -13,53 +13,67 @@ import 'package:softito_final_project/views/register_page.dart';
 import 'package:softito_final_project/views/reset_password_page.dart';
 
 import '../components/login__register_page/or_continue_with.dart';
+import '../viewmodel/search_view_model.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
-  final usernameController = TextEditingController(text: "bugra@bugra.com");
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final usernameController = TextEditingController(text: "aaa@aaa.com");
 
   final passwordController = TextEditingController(text: "123456");
 
-  @override
-  Widget build(BuildContext context) {
-    signUserIn() async {
-      print('basıldı');
-      if (usernameController.text != null && passwordController.text != null) {
-        var provider = Provider.of<LoginViewModel>(context, listen: false);
-        await provider.login(usernameController.text, passwordController.text);
-        print(usernameController.text + passwordController.text);
-        print(provider.isLogin);
-        if (provider.isLogin) {
-          var prov = Provider.of<FoodViewModel>(context, listen: false);
-          prov.getBreakfast(provider.user);
-          prov.getLunch(provider.user);
-          prov.getDinner(provider.user);
-          print(prov.breakfast);
-
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text(
-            "Email or Password is incorrect! Please make sure you entered it correctly.",
-            style: TextStyle(color: Colors.white),
-          )));
-        }
+  signUserIn(BuildContext context) async {
+    print('basıldı');
+    if (usernameController.text != null && passwordController.text != null) {
+      var provider = Provider.of<LoginViewModel>(context, listen: false);
+      await provider.login(usernameController.text, passwordController.text);
+      print(usernameController.text + passwordController.text);
+      print(provider.isLogin);
+      if (provider.isLogin) {
+        var prov = Provider.of<FoodViewModel>(context, listen: false);
+        prov.getBreakfast(provider.user);
+        prov.getLunch(provider.user);
+        prov.getDinner(provider.user);
+        print(prov.breakfast);
+        var p = await Provider.of<SearchViewModel>(context, listen: false);
+        p.getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
-          "Please check your Email or Password! Please fill in the blanks.",
+          "Email or Password is incorrect! Please make sure you entered it correctly.",
           style: TextStyle(color: Colors.white),
         )));
       }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+        "Please check your Email or Password! Please fill in the blanks.",
+        style: TextStyle(color: Colors.white),
+      )));
     }
+  }
 
-    toRegister() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
-    }
+  toRegister(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => RegisterPage()));
+  }
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   signUserIn(context);
+  //   toRegister(context);
+  // }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffFFEAEA),
       body: SingleChildScrollView(
@@ -99,7 +113,7 @@ class LoginPage extends StatelessWidget {
 
               //login button
               const SizedBox(height: 10),
-              SignButton(ontap: signUserIn, text: 'Sign in'),
+              SignButton(ontap: () => signUserIn(context), text: 'Sign in'),
 
               //or continue with
               // const SizedBox(height: 50),
@@ -113,7 +127,7 @@ class LoginPage extends StatelessWidget {
               //not a member? register here
               const SizedBox(height: 50),
               LoginToRegister(
-                ontap: toRegister,
+                ontap: () => toRegister(context),
               )
             ]),
           ),

@@ -30,7 +30,8 @@ class _MealCardState extends State<MealCard> {
     var pr = Provider.of<FoodViewModel>(context, listen: false);
     p.clearCal();
     p.getBreakfastCall(breakfast, launch, dinner);
-    List<double> cal_meal = [p.breakFastCal, p.lunchCal, p.dinnerCal];
+    // List<double> cal_meal = [p.breakFastCal, p.lunchCal, p.dinnerCal];
+
     return Container(
       margin: const EdgeInsets.all(20),
       height: MediaQuery.of(context).size.height * 0.4,
@@ -111,7 +112,7 @@ class _MealCardState extends State<MealCard> {
                                   ),
                                 ),
                                 Text("Total: " +
-                                    cal_meal[index]
+                                    p.cal_meal[index]
                                         .toStringAsFixed(1)
                                         .toString() +
                                     " kcal"),
@@ -173,7 +174,7 @@ class _MealCardState extends State<MealCard> {
                             ),
                             Text(calories[index] +
                                 "/" +
-                                cal_meal[index].toInt().toString() +
+                                p.cal_meal[index].toInt().toString() +
                                 "kcal"),
                           ],
                         ),

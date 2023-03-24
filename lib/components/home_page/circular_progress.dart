@@ -7,7 +7,6 @@ import 'package:softito_final_project/viewmodel/search_view_model.dart';
 
 class CircularProgress extends StatefulWidget {
   const CircularProgress({super.key});
-
   @override
   State<CircularProgress> createState() => _CircularProgressState();
 }
@@ -15,8 +14,9 @@ class CircularProgress extends StatefulWidget {
 class _CircularProgressState extends State<CircularProgress> {
   @override
   Widget build(BuildContext context) {
-    var cal = Provider.of<SearchViewModel>(context, listen: false);
-
+    //var cal = Provider.of<SearchViewModel>(context, listen: false);
+    double cal = context.read<SearchViewModel>().totalCal;
+    // print(context.read<SearchViewModel>().totalCal);
     return Container(
       height: MediaQuery.of(context).size.height * 0.30,
       child: new CircularPercentIndicator(
@@ -26,7 +26,7 @@ class _CircularProgressState extends State<CircularProgress> {
         center: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            new Text("${cal.totalCal.toInt()} kcal"),
+            new Text("${cal.toInt()} kcal"),
             Icon(Icons.bolt_rounded)
           ],
         ),
