@@ -22,7 +22,7 @@ class MealCard extends StatelessWidget {
     List<List<Nutritions>> meal_names = [breakfast, launch, dinner];
 
     var p = Provider.of<SearchViewModel>(context, listen: false);
-    
+
     // p.clearCal();
     // p.getBreakfastCall(breakfast, launch, dinner);
     // List<double> cal_meal = [p.breakFastCal, p.lunchCal, p.dinnerCal];

@@ -10,11 +10,6 @@ class CircularProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var prov = Provider.of<FoodViewModel>(context);
-
-    context
-        .read<SearchViewModel>()
-        .getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
     //var cal = Provider.of<SearchViewModel>(context, listen: false);
     //double cal = context.read<SearchViewModel>().totalCal;
     // print(context.read<SearchViewModel>().totalCal);
@@ -23,13 +18,14 @@ class CircularProgress extends StatelessWidget {
       child: CircularPercentIndicator(
         radius: 95.0,
         lineWidth: 20.0,
-        percent: context.read<SearchViewModel>().totalCal < 3000
-            ? context.read<SearchViewModel>().totalCal / 3000
+        percent: context.watch<SearchViewModel>().totalCal < 3000
+            ? context.watch<SearchViewModel>().totalCal / 3000
             : 1,
         center: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("${context.read<SearchViewModel>().totalCal} kcal"),
+            Text(
+                "${context.watch<SearchViewModel>().totalCal.toStringAsFixed(0)} kcal"),
             Icon(Icons.bolt_rounded)
           ],
         ),

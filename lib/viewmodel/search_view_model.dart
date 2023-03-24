@@ -62,7 +62,6 @@ class SearchViewModel extends ChangeNotifier {
     totalProtein = bprotein + lprotein + dprotein;
     totalCarb = bcarb + lcarb + dcarb;
     totalFat = bfat + lfat + dfat;
-    notifyListeners();
     print(breakFastCal);
     print(lunch);
     print(dinner);
@@ -74,6 +73,7 @@ class SearchViewModel extends ChangeNotifier {
     print("breakFastCal");
 
     //notifyListeners();
+    notifyListeners();
   }
 
   Future clearCal() async {

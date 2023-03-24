@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,7 @@ import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/register_page.dart';
 import 'package:softito_final_project/views/reset_password_page.dart';
 
+import '../viewmodel/search_view_model.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -29,9 +32,12 @@ class LoginPage extends StatelessWidget {
       print(provider.isLogin);
       if (provider.isLogin) {
         var prov = Provider.of<FoodViewModel>(context, listen: false);
-        prov.getBreakfast(provider.user);
-        prov.getLunch(provider.user);
-        prov.getDinner(provider.user);
+        await prov.getBreakfast(provider.user);
+        await prov.getLunch(provider.user);
+        await prov.getDinner(provider.user);
+        context
+            .read<SearchViewModel>()
+            .getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
         print(prov.breakfast);
         //var p = await Provider.of<SearchViewModel>(context, listen: false);
         //p.getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
