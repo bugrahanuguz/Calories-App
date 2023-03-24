@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:softito_final_project/components/login__register_page/forgot_password.dart';
 import 'package:softito_final_project/components/login__register_page/login_google.dart';
@@ -8,6 +9,7 @@ import 'package:softito_final_project/components/login__register_page/text_field
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/register_page.dart';
+import 'package:softito_final_project/views/reset_password_page.dart';
 
 import '../components/login__register_page/or_continue_with.dart';
 
@@ -47,9 +49,10 @@ class LoginPage extends StatelessWidget {
             child: Column(children: [
               const SizedBox(height: 50),
               //logo
-              const Icon(
-                Icons.lock,
-                size: 100,
+
+              Lottie.asset(
+                'assets/images/login.json',
+                height: 100,
               ),
 
               const SizedBox(height: 50),
@@ -68,6 +71,10 @@ class LoginPage extends StatelessWidget {
               //Forgot password
               const SizedBox(height: 10),
               ForgotPassword(
+                ontap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ResetPassword()));
+                },
                 text: 'Forgot password?',
               ),
 
@@ -76,13 +83,13 @@ class LoginPage extends StatelessWidget {
               SignButton(ontap: signUserIn, text: 'Sign in'),
 
               //or continue with
-              const SizedBox(height: 50),
-              const OrContinueWith(text: 'Or continue with'),
-              //google button
-              const SizedBox(height: 50),
-              const LoginGoogle(
-                imagePath: 'assets/images/google_icon.png',
-              ),
+              // const SizedBox(height: 50),
+              // const OrContinueWith(text: 'Or continue with'),
+              // //google button
+              // const SizedBox(height: 50),
+              // const LoginGoogle(
+              //   imagePath: 'assets/images/google_icon.png',
+              // ),
 
               //not a member? register here
               const SizedBox(height: 50),
@@ -96,6 +103,8 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+
 
 //     Scaffold(
 //       body: SafeArea(

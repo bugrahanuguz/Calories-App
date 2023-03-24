@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:softito_final_project/viewmodel/reset_password.dart';
 import 'package:softito_final_project/views/login_page.dart';
@@ -38,10 +39,7 @@ class ResetPassword extends StatelessWidget {
           child: Column(children: [
             const SizedBox(height: 50),
             //logo
-            const Icon(
-              Icons.app_registration,
-              size: 100,
-            ),
+            Lottie.asset('assets/images/forgot_password.json', height: 100),
 
             const SizedBox(height: 50),
             //username

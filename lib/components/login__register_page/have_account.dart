@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:softito_final_project/views/reset_password_page.dart';
 
-class ForgotPassword extends StatelessWidget {
+class HaveAccount extends StatelessWidget {
   final String text;
   final Function()? ontap;
-  const ForgotPassword({super.key, required this.text, this.ontap});
+  const HaveAccount({super.key, required this.text, this.ontap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,3 @@ class ForgotPassword extends StatelessWidget {
     );
   }
 }
-// () {
-//             Navigator.push(context,
-//                 MaterialPageRoute(builder: (context) => ResetPassword()));
-//           }

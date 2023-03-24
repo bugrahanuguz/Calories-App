@@ -22,7 +22,7 @@ class SignButton extends StatelessWidget {
         padding: EdgeInsets.all(25),
         margin: EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
-            color: Colors.black, borderRadius: BorderRadius.circular(8)),
+            color: Colors.purple, borderRadius: BorderRadius.circular(8)),
         child: Center(
             child: Text(text,
                 style: TextStyle(

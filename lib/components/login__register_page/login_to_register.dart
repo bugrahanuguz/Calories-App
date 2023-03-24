@@ -20,7 +20,7 @@ class LoginToRegister extends StatelessWidget {
             child: Text(
               "Register here",
               style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                  TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
             ))
       ],
     );
