@@ -10,9 +10,9 @@ class CaloriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double protein = context.watch<SearchViewModel>().protein;
-    double carb = context.watch<SearchViewModel>().carb;
-    double fat = context.watch<SearchViewModel>().fat;
+    double protein = context.watch<SearchViewModel>().total_protein;
+    double carb = context.watch<SearchViewModel>().total_carb;
+    double fat = context.watch<SearchViewModel>().total_fat;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
