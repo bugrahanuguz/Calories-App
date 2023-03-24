@@ -7,9 +7,9 @@ class SearchViewModel extends ChangeNotifier {
   List food = [];
   List<Nutritions> foodList = [];
   double cal = 0;
-  double protein = 0;
-  double carb = 0;
-  double fat = 0;
+  double bprotein = 0;
+  double bcarb = 0;
+  double bfat = 0;
   double lprotein = 0;
   double lcarb = 0;
   double lfat = 0;
@@ -21,13 +21,15 @@ class SearchViewModel extends ChangeNotifier {
   double lunchCal = 0;
   double dinnerCal = 0;
   double totalCal = 0;
-
-  double total_protein = 0;
-  double total_fat = 0;
-  double total_carb = 0;
+  double protein = 0;
+  double fat = 0;
+  double carb = 0;
+  double totalProtein = 0;
+  double totalFat = 0;
+  double totalCarb = 0;
   List<double> cal_meal = [];
 
-  addFood(String txt) {
+  Future addFood(String txt) async {
     food.add(txt);
     notifyListeners();
   }
@@ -35,11 +37,13 @@ class SearchViewModel extends ChangeNotifier {
   Future getBreakfastCall(List<Nutritions> breakfast, List<Nutritions> lunch,
       List<Nutritions> dinner) async {
     print("breakFastCal");
+    clearCal();
+
     for (var i = 0; i < breakfast.length; i++) {
       breakFastCal += breakfast[i].calories!;
-      protein += breakfast[i].proteinG!;
-      fat += breakfast[i].fatTotalG!;
-      carb += breakfast[i].carbohydratesTotalG!;
+      bprotein += breakfast[i].proteinG!;
+      bfat += breakfast[i].fatTotalG!;
+      bcarb += breakfast[i].carbohydratesTotalG!;
     }
     for (var i = 0; i < lunch.length; i++) {
       lunchCal += lunch[i].calories!;
@@ -55,32 +59,47 @@ class SearchViewModel extends ChangeNotifier {
     }
 
     totalCal = dinnerCal + lunchCal + breakFastCal;
-    total_protein = protein + lprotein + lfat;
-    total_carb = carb + lcarb + dcarb;
-    total_fat = fat + lfat + dfat;
+    totalProtein = bprotein + lprotein + dprotein;
+    totalCarb = bcarb + lcarb + dcarb;
+    totalFat = bfat + lfat + dfat;
     notifyListeners();
     print(breakFastCal);
     print(lunch);
     print(dinner);
-    print(total_carb);
-    print(total_fat);
-    print(total_protein);
+    print(totalCarb);
+    print(totalFat);
+    print(totalProtein);
 
     cal_meal = [breakFastCal, lunchCal, dinnerCal];
     print("breakFastCal");
 
-    notifyListeners();
+    //notifyListeners();
   }
 
-  clearCal() {
+  Future clearCal() async {
+    cal = 0;
+    bprotein = 0;
+    bcarb = 0;
+    bfat = 0;
+    lprotein = 0;
+    lcarb = 0;
+    lfat = 0;
+    dprotein = 0;
+    dcarb = 0;
+    dfat = 0;
     breakFastCal = 0;
     lunchCal = 0;
     dinnerCal = 0;
     totalCal = 0;
-    notifyListeners();
+    protein = 0;
+    fat = 0;
+    carb = 0;
+    totalProtein = 0;
+    totalFat = 0;
+    totalCarb = 0;
   }
 
-  addFoodList(Nutritions nutrit, int index) {
+  Future addFoodList(Nutritions nutrit, int index) async {
     foodList.add(nutrit);
     cal += double.parse(foodList[index].calories.toString());
     protein += double.parse(foodList[index].proteinG.toString());
@@ -90,7 +109,7 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  removeFood(int index) {
+  Future removeFood(int index) async {
     cal -= double.parse(foodList[index].calories.toString());
     protein -= double.parse(foodList[index].proteinG.toString());
     carb -= double.parse(foodList[index].carbohydratesTotalG.toString());
@@ -100,12 +119,12 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  clearFoodList() {
+  Future clearFoodList() async {
     foodList.clear();
     notifyListeners();
   }
 
-  sendButtonName(int index) {
+  Future sendButtonName(int index) async {
     buttonName = index;
     notifyListeners();
   }

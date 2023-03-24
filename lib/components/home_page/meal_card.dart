@@ -8,14 +8,9 @@ import 'package:softito_final_project/views/search_page.dart';
 
 import '../../viewmodel/homepage_view_model.dart';
 
-class MealCard extends StatefulWidget {
+class MealCard extends StatelessWidget {
   const MealCard({super.key});
 
-  @override
-  State<MealCard> createState() => _MealCardState();
-}
-
-class _MealCardState extends State<MealCard> {
   @override
   Widget build(BuildContext context) {
     List meal = context.watch<HomepageViewModel>().meals;
@@ -27,9 +22,9 @@ class _MealCardState extends State<MealCard> {
     List<List<Nutritions>> meal_names = [breakfast, launch, dinner];
 
     var p = Provider.of<SearchViewModel>(context, listen: false);
-    var pr = Provider.of<FoodViewModel>(context, listen: false);
-    p.clearCal();
-    p.getBreakfastCall(breakfast, launch, dinner);
+    
+    // p.clearCal();
+    // p.getBreakfastCall(breakfast, launch, dinner);
     // List<double> cal_meal = [p.breakFastCal, p.lunchCal, p.dinnerCal];
 
     return Container(
@@ -52,7 +47,7 @@ class _MealCardState extends State<MealCard> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                            children: const [
                               Text(
                                 "Food",
                                 style: TextStyle(

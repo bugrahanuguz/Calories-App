@@ -11,14 +11,9 @@ import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
 import 'package:softito_final_project/viewmodel/foods_view_model.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     //List food = context.watch<SearchViewModel>().food;

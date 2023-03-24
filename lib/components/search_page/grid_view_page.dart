@@ -8,14 +8,9 @@ import 'package:softito_final_project/viewmodel/search_view_model.dart';
 
 import '../../const_files/const_variable.dart';
 
-class GridViewPage extends StatefulWidget {
+class GridViewPage extends StatelessWidget {
   const GridViewPage({super.key});
 
-  @override
-  State<GridViewPage> createState() => _GridViewPageState();
-}
-
-class _GridViewPageState extends State<GridViewPage> {
   @override
   Widget build(BuildContext context) {
     List food = context.watch<SearchViewModel>().food;
