@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:softito_final_project/const_files/const_variable.dart';
+import 'package:softito_final_project/services/food_service.dart';
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,6 +14,8 @@ class RegisterService {
   bool _isRegister = false;
   bool get isRegister => _isRegister;
 
+  FoodService f = FoodService();
+
   Future<UserModel?> signUser(UserModel user) async {
     http.Response response = await http.post(getUrl(),
         body: user.toJson(), headers: {"Content-Type": "application/json"});
@@ -20,6 +23,7 @@ class RegisterService {
       var data = json.decode(response.body);
       user.id = data["localId"];
       signtoUser(user);
+      f.getBreakfast(user);
       _isRegister = true;
       print(data);
       return user;

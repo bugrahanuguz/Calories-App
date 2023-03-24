@@ -12,12 +12,40 @@ class FoodViewModel extends ChangeNotifier {
   List<Nutritions> breakfast = [];
   List<Nutritions> lunch = [];
   List<Nutritions> dinner = [];
-
   setUser(Nutritions u) {
     _food = u;
     notifyListeners();
   }
 
+  Future getBreakfast(UserModel currentUser) async {
+    _currentUser = currentUser;
+
+    final response = await services.getBreakfast(currentUser);
+    breakfast = response;
+
+    print(breakfast);
+    notifyListeners();
+  }
+
+  Future getLunch(UserModel currentUser) async {
+    _currentUser = currentUser;
+
+    final response = await services.getLunch(currentUser);
+    lunch = response;
+
+    print(lunch);
+    notifyListeners();
+  }
+
+  Future getDinner(UserModel currentUser) async {
+    _currentUser = currentUser;
+
+    final response = await services.getDinner(currentUser);
+    dinner = response;
+
+    print(dinner);
+    notifyListeners();
+  }
   // Future setFoods(Nutritions nutritions, UserModel currentUser) async {
   //   _currentUser = currentUser;
   //   Nutritions newFood = Nutritions(
@@ -42,6 +70,7 @@ class FoodViewModel extends ChangeNotifier {
         fatTotalG: nutritions.fatTotalG,
         servingSizeG: nutritions.servingSizeG);
     final response = await services.postBreakfast(newFood, currentUser);
+    getBreakfast(currentUser);
     _food = response;
     breakfast.add(_food!);
     notifyListeners();
@@ -57,6 +86,7 @@ class FoodViewModel extends ChangeNotifier {
         fatTotalG: nutritions.fatTotalG,
         servingSizeG: nutritions.servingSizeG);
     final response = await services.postDinner(newFood, currentUser);
+    getDinner(currentUser);
     _food = response;
     notifyListeners();
   }
@@ -71,6 +101,7 @@ class FoodViewModel extends ChangeNotifier {
         fatTotalG: nutritions.fatTotalG,
         servingSizeG: nutritions.servingSizeG);
     final response = await services.postLunch(newFood, currentUser);
+    getLunch(currentUser);
     _food = response;
     notifyListeners();
   }

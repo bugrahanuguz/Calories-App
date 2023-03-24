@@ -16,8 +16,9 @@ class MealCard extends StatelessWidget {
     List<IconData?> mealIcon = context.watch<HomepageViewModel>().mealsIcon;
     List calories = context.watch<HomepageViewModel>().calories;
     List<Nutritions> breakfast = context.watch<FoodViewModel>().breakfast;
-
-    int val = context.watch<SearchViewModel>().buttonName;
+    List<Nutritions> launch = context.watch<FoodViewModel>().lunch;
+    List<Nutritions> dinner = context.watch<FoodViewModel>().dinner;
+    List<List<Nutritions>> meal_names = [breakfast, launch, dinner];
     return Container(
       margin: const EdgeInsets.all(20),
       height: MediaQuery.of(context).size.height * 0.4,
@@ -25,48 +26,58 @@ class MealCard extends StatelessWidget {
         itemCount: meal.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () => showDialog(
-              barrierColor: Color(0xffFFEAEA),
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(meal[index]),
-                  content: Container(
-                    width: 200,
-                    height: 200,
-                    child: ListView.builder(
-                      shrinkWrap: false,
-                      itemCount: breakfast.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (val == 0) {
-                          return Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                    text: breakfast[index].name,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                              ],
-                            ),
+            onTap: () {
+              var p = Provider.of<SearchViewModel>(context, listen: false);
+              var pr = Provider.of<FoodViewModel>(context, listen: false);
+              p.sendButtonName(index);
+
+              showDialog(
+                barrierColor: Colors.purple.shade100,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(meal[index]),
+                    content: Container(
+                      width: 200,
+                      height: 200,
+                      child: ListView.builder(
+                        shrinkWrap: false,
+                        itemCount: meal_names[index].length == 0
+                            ? 0
+                            : meal_names[index].length,
+                        itemBuilder: (BuildContext context, index2) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(meal_names[index][index2].name.toString()),
+                              Text(meal_names[index][index2]
+                                      .servingSizeG
+                                      .toString() +
+                                  " g"),
+                              Text(meal_names[index][index2]
+                                  .calories
+                                  .toString()),
+                              Text("Total: " + p.breakFastCal.toString()),
+                            ],
                           );
-                        }
-                      },
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: Theme.of(context).textTheme.labelLarge,
+                        },
                       ),
-                      child: const Text('Close'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
                     ),
-                  ],
-                );
-              },
-              context: context,
-            ),
+                    actions: <Widget>[
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+                context: context,
+              );
+            },
             child: Container(
               height: MediaQuery.of(context).size.height * 0.1,
               decoration:
