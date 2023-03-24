@@ -25,6 +25,14 @@ class _SearchPageState extends State<SearchPage> {
     List<Nutritions> foodList = context.watch<SearchViewModel>().foodList;
     UserModel user = context.read<LoginViewModel>().user;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purple,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios)),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -40,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
               Visibility(
                 visible: foodList.length == 0 ? false : true,
                 child: Container(
-                  height: ConstVariable(context).screenHeight * 0.05,
+                  height: ConstVariable(context).screenHeight * 0.055,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: foodList.length,
@@ -52,12 +60,6 @@ class _SearchPageState extends State<SearchPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircleAvatar(
-                                  radius: 20.0,
-                                  backgroundImage: NetworkImage(
-                                      Faker().image.image(random: true)),
-                                  backgroundColor: Colors.transparent,
-                                ),
                                 SizedBox(
                                   width: 5,
                                 ),
@@ -72,13 +74,15 @@ class _SearchPageState extends State<SearchPage> {
                                         width: 10,
                                       ),
                                       Text(foodList[index].name.toString()),
-                                      CloseButton(
-                                        color: Colors.red,
-                                        onPressed: () {
-                                          context
-                                              .read<SearchViewModel>()
-                                              .removeFood(index);
-                                        },
+                                      Container(
+                                        child: CloseButton(
+                                          color: Colors.red,
+                                          onPressed: () {
+                                            context
+                                                .read<SearchViewModel>()
+                                                .removeFood(index);
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),

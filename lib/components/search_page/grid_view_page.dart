@@ -20,13 +20,20 @@ class _GridViewPageState extends State<GridViewPage> {
   Widget build(BuildContext context) {
     List food = context.watch<SearchViewModel>().food;
     var list = context.watch<NutritionViewModel>().nutrition_list;
+
+    for (var i = 0; i < list.length; i++) {
+      String string = list[i].name.toString();
+      string = string[0].toUpperCase() + string.substring(1);
+      list[i].name = string;
+    }
+
     return Container(
       margin: EdgeInsets.all(15),
       height: ConstVariable(context).screenHeight * 0.7,
       child: GridView.builder(
         itemCount: list.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 4 / 5, crossAxisCount: 2),
+            childAspectRatio: .9, crossAxisCount: 2),
         itemBuilder: (_, index) => Container(
           child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -43,35 +50,97 @@ class _GridViewPageState extends State<GridViewPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  Text("Food:" + " " + list[index].name.toString()),
-                  Text("Calories:" + " " + list[index].calories.toString()),
-                  Text("Serving Size:" +
-                      " " +
-                      list[index].servingSizeG.toString()),
-                  Text("Protein:" + " " + list[index].proteinG.toString()),
-                  Text("Carb:" +
-                      " " +
-                      list[index].carbohydratesTotalG.toString()),
-                  Text("Fat:" + " " + list[index].fatTotalG.toString()),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'FOOD: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: list[index].name.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'CALORIES: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: list[index].calories.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'SERVING SIZE: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: list[index].servingSizeG.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'PROTEIN: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: list[index].proteinG.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'CARBS: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: list[index].carbohydratesTotalG.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'FAT: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: list[index].fatTotalG.toString(),
+                        ),
+                      ],
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Container(
-                        height: ConstVariable(context).screenHeight * 0.04,
-                        width: ConstVariable(context).screenWidth * 0.1,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
                         color: Colors.purple,
-                        child: TextButton(
-                            onPressed: () {
-                              context
-                                  .read<SearchViewModel>()
-                                  .addFoodList(list[index], index);
-                            },
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            )),
                       ),
+                      height: ConstVariable(context).screenHeight * 0.06,
+                      width: ConstVariable(context).screenWidth * 0.12,
+                      child: TextButton(
+                          onPressed: () {
+                            context
+                                .read<SearchViewModel>()
+                                .addFoodList(list[index], index);
+                          },
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          )),
                     ),
                   )
                 ],
