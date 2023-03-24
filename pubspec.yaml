@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.0.5
   faker: ^2.1.0
   percent_indicator: ^4.2.3
+  lottie: ^2.3.0
 
 
 dev_dependencies:

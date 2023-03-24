@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:softito_final_project/components/login__register_page/have_account.dart';
 import 'package:softito_final_project/components/login__register_page/signButton.dart';
 import 'package:softito_final_project/components/login__register_page/text_field.dart';
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/views/login_page.dart';
+
+import '../components/login__register_page/forgot_password.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -15,7 +19,10 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    onTap() {
+      Navigator.pop(context);
+    }
+
     signUserIn() async {
       print('basıldı');
       if (usernameController.text != null && passwordController.text != null) {
@@ -33,37 +40,35 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
-        child: Padding(
-          padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
-          child: Center(
-            child: Column(children: [
-              const SizedBox(height: 50),
-              //logo
-              const Icon(
-                Icons.app_registration,
-                size: 100,
-              ),
+        child: Center(
+          child: Column(children: [
+            const SizedBox(height: 50),
+            //logo
+            Lottie.asset('assets/images/login.json', height: 100),
 
-              const SizedBox(height: 50),
-              //username
-              LoginTextField(
-                  controller: usernameController,
-                  hintText: "Username",
-                  obscureText: false),
-              //password
-              const SizedBox(height: 50),
-              LoginTextField(
-                  controller: passwordController,
-                  hintText: "password",
-                  obscureText: true),
+            const SizedBox(height: 50),
+            //username
+            LoginTextField(
+                controller: usernameController,
+                hintText: "Username",
+                obscureText: false),
+            //password
+            const SizedBox(height: 50),
+            LoginTextField(
+                controller: passwordController,
+                hintText: "password",
+                obscureText: true),
+            const SizedBox(height: 10),
+            HaveAccount(
+              ontap: onTap,
+              text: 'Do you have an account? Sign In',
+            ),
 
-              const SizedBox(height: 50),
-              SignButton(ontap: signUserIn, text: 'Sign Up'),
+            const SizedBox(height: 10),
+            SignButton(ontap: signUserIn, text: 'Sign Up'),
 
-              //password check
-            ]),
-          ),
+            //password check
+          ]),
         ),
       ),
     );
