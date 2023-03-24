@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
-
+import '../../viewmodel/foods_view_model.dart';
 import '../../viewmodel/search_view_model.dart';
 
 class CaloriesWidget extends StatelessWidget {
@@ -10,9 +8,13 @@ class CaloriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double protein = context.watch<SearchViewModel>().total_protein;
-    double carb = context.watch<SearchViewModel>().total_carb;
-    double fat = context.watch<SearchViewModel>().total_fat;
+    var p = Provider.of<SearchViewModel>(context, listen: false);
+    var prov = Provider.of<FoodViewModel>(context, listen: false);
+    //p.clearCal();
+    //p.getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
+    double protein = context.read<SearchViewModel>().totalProtein;
+    double carb = context.read<SearchViewModel>().totalCarb;
+    double fat = context.read<SearchViewModel>().totalFat;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -23,9 +25,9 @@ class CaloriesWidget extends StatelessWidget {
               children: [
                 Text(
                   nutritionsValue[0],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text("${protein.toInt()} g"),
+                Text("${p.totalProtein.toInt()} g"),
               ],
             ),
             context,

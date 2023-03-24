@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -12,17 +14,11 @@ import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/register_page.dart';
 import 'package:softito_final_project/views/reset_password_page.dart';
 
-import '../components/login__register_page/or_continue_with.dart';
 import '../viewmodel/search_view_model.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   final usernameController = TextEditingController(text: "aaa@aaa.com");
 
   final passwordController = TextEditingController(text: "123456");
@@ -36,14 +32,16 @@ class _LoginPageState extends State<LoginPage> {
       print(provider.isLogin);
       if (provider.isLogin) {
         var prov = Provider.of<FoodViewModel>(context, listen: false);
-        prov.getBreakfast(provider.user);
-        prov.getLunch(provider.user);
-        prov.getDinner(provider.user);
+        await prov.getBreakfast(provider.user);
+        await prov.getLunch(provider.user);
+        await prov.getDinner(provider.user);
+        context
+            .read<SearchViewModel>()
+            .getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
         print(prov.breakfast);
-        var p = await Provider.of<SearchViewModel>(context, listen: false);
-        p.getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+        //var p = await Provider.of<SearchViewModel>(context, listen: false);
+        //p.getBreakfastCall(prov.breakfast, prov.lunch, prov.dinner);
+        provider.delay(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
@@ -66,12 +64,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // @override
-  // void initState() {
-  //   super.initState();
-  //   signUserIn(context);
-  //   toRegister(context);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,8 +128,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
 
 //     Scaffold(
 //       body: SafeArea(

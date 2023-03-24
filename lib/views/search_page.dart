@@ -11,14 +11,9 @@ import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/viewmodel/search_view_model.dart';
 import 'package:softito_final_project/viewmodel/foods_view_model.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     //List food = context.watch<SearchViewModel>().food;
@@ -107,7 +102,7 @@ class _SearchPageState extends State<SearchPage> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   )),
-              ChangeMealName(),
+              //ChangeMealName(),
               GridViewPage(),
             ],
           ),
@@ -116,27 +111,23 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Color(0xffC92C6D),
         onPressed: () async {
+          var provider =
+              await Provider.of<FoodViewModel>(context, listen: false);
           var pr = Provider.of<SearchViewModel>(context, listen: false);
           var vall = pr.buttonName;
           switch (vall) {
             case 0:
               for (int i = 0; i < foodList.length; i++) {
-                var provider =
-                    await Provider.of<FoodViewModel>(context, listen: false);
                 provider.setBreakfast(foodList[i], user);
               }
               break;
             case 1:
               for (int i = 0; i < foodList.length; i++) {
-                var provider =
-                    await Provider.of<FoodViewModel>(context, listen: false);
                 provider.setLunch(foodList[i], user);
               }
               break;
             case 2:
               for (int i = 0; i < foodList.length; i++) {
-                var provider =
-                    await Provider.of<FoodViewModel>(context, listen: false);
                 provider.setDinner(foodList[i], user);
               }
               break;
@@ -144,9 +135,9 @@ class _SearchPageState extends State<SearchPage> {
             default:
           }
 
-          var provider =
-              await Provider.of<SearchViewModel>(context, listen: false);
-          provider.clearFoodList();
+          pr.clearFoodList();
+          pr.getBreakfastCall(
+              provider.breakfast, provider.lunch, provider.dinner);
         },
         icon: Icon(
           Icons.save,

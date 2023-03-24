@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:softito_final_project/services/register_service.dart';
 import '../models/user_model.dart';
 import '../services/login_service.dart';
+import '../views/home_page.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final _service = LoginService();
@@ -39,6 +40,15 @@ class LoginViewModel extends ChangeNotifier {
     final response = await _service2.signUser(newUser);
     _user = response;
     _isRegister = _service2.isRegister;
+    notifyListeners();
+  }
+
+  Future delay(BuildContext context) async {
+    await Future.delayed(Duration(seconds: 1));
+
+    notifyListeners();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
     notifyListeners();
   }
 }

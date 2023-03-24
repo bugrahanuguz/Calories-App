@@ -9,7 +9,6 @@ String _foodApi = ConstVariable.firebase_user_api;
 class FoodService {
   Uri getUrl(String endpoint) => Uri.parse("$_foodApi/$endpoint.json");
 
-
   Future<List<Nutritions>> getFoods() async {
     http.Response response = await http.get(getUrl("foods"));
     List<Nutritions> list = [];
@@ -35,7 +34,7 @@ class FoodService {
         Nutritions nut = Nutritions.fromMap(data[key]);
         list.add(nut);
       }
-      
+
       print("----------");
       print(list);
     }
