@@ -31,7 +31,7 @@ class ResetPassword extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Color(0xffFFEAEA),
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
