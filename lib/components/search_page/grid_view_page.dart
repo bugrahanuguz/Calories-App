@@ -43,7 +43,7 @@ class _GridViewPageState extends State<GridViewPage> {
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -69,7 +69,7 @@ class _GridViewPageState extends State<GridViewPage> {
                             text: 'CALORIES: ',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: list[index].calories.toString(),
+                          text: (list[index].calories.toString() + " kcal"),
                         ),
                       ],
                     ),
@@ -81,7 +81,7 @@ class _GridViewPageState extends State<GridViewPage> {
                             text: 'SERVING SIZE: ',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: list[index].servingSizeG.toString(),
+                          text: (list[index].servingSizeG.toString() + " g"),
                         ),
                       ],
                     ),
@@ -93,7 +93,7 @@ class _GridViewPageState extends State<GridViewPage> {
                             text: 'PROTEIN: ',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: list[index].proteinG.toString(),
+                          text: (list[index].proteinG.toString() + " g"),
                         ),
                       ],
                     ),
@@ -105,7 +105,8 @@ class _GridViewPageState extends State<GridViewPage> {
                             text: 'CARBS: ',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: list[index].carbohydratesTotalG.toString(),
+                          text: (list[index].carbohydratesTotalG.toString() +
+                              " g"),
                         ),
                       ],
                     ),
@@ -117,7 +118,7 @@ class _GridViewPageState extends State<GridViewPage> {
                             text: 'FAT: ',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
-                          text: list[index].fatTotalG.toString(),
+                          text: (list[index].fatTotalG.toString() + " g"),
                         ),
                       ],
                     ),
@@ -126,10 +127,10 @@ class _GridViewPageState extends State<GridViewPage> {
                     alignment: Alignment.bottomRight,
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                         color: Color(0xffC92C6D),
                       ),
-                      height: ConstVariable(context).screenHeight * 0.06,
+                      height: ConstVariable(context).screenHeight * 0.055,
                       width: ConstVariable(context).screenWidth * 0.12,
                       child: TextButton(
                           onPressed: () {

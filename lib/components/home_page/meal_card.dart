@@ -46,7 +46,7 @@ class _MealCardState extends State<MealCard> {
                   return AlertDialog(
                     title: Text(meal[index]),
                     content: Container(
-                      height: 250,
+                      height: 300,
                       child: Column(
                         children: [
                           Row(
@@ -74,7 +74,7 @@ class _MealCardState extends State<MealCard> {
                             child: Column(
                               children: [
                                 Container(
-                                  width: 200,
+                                  width: 250,
                                   height: 150,
                                   child: ListView.builder(
                                     shrinkWrap: false,
@@ -100,8 +100,9 @@ class _MealCardState extends State<MealCard> {
                                                       .toString() +
                                                   " g"),
                                               Text(meal_names[index][index2]
-                                                  .calories
-                                                  .toString()),
+                                                      .calories
+                                                      .toString() +
+                                                  " kcal"),
                                             ],
                                           ),
                                         ],
@@ -112,7 +113,8 @@ class _MealCardState extends State<MealCard> {
                                 Text("Total: " +
                                     cal_meal[index]
                                         .toStringAsFixed(1)
-                                        .toString()),
+                                        .toString() +
+                                    " kcal"),
                               ],
                             ),
                           ),

@@ -107,7 +107,7 @@ class _SearchPageState extends State<SearchPage> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   )),
-              ChangeMealName(),
+              //ChangeMealName(),
               GridViewPage(),
             ],
           ),
