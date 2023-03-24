@@ -115,11 +115,34 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.purple,
         onPressed: () async {
-          for (int i = 0; i < foodList.length; i++) {
-            var provider =
-                await Provider.of<FoodViewModel>(context, listen: false);
-            provider.setFoods(foodList[i], user);
+          var pr = Provider.of<SearchViewModel>(context, listen: false);
+          var vall = pr.buttonName;
+          switch (vall) {
+            case 0:
+              for (int i = 0; i < foodList.length; i++) {
+                var provider =
+                    await Provider.of<FoodViewModel>(context, listen: false);
+                provider.setBreakfast(foodList[i], user);
+              }
+              break;
+            case 1:
+              for (int i = 0; i < foodList.length; i++) {
+                var provider =
+                    await Provider.of<FoodViewModel>(context, listen: false);
+                provider.setLunch(foodList[i], user);
+              }
+              break;
+            case 2:
+              for (int i = 0; i < foodList.length; i++) {
+                var provider =
+                    await Provider.of<FoodViewModel>(context, listen: false);
+                provider.setDinner(foodList[i], user);
+              }
+              break;
+
+            default:
           }
+
           var provider =
               await Provider.of<SearchViewModel>(context, listen: false);
           provider.clearFoodList();

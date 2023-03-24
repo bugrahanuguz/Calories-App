@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:softito_final_project/models/nutritions_model.dart';
+import 'package:softito_final_project/viewmodel/foods_view_model.dart';
+import 'package:softito_final_project/viewmodel/search_view_model.dart';
 import 'package:softito_final_project/views/search_page.dart';
 
 import '../../viewmodel/homepage_view_model.dart';
@@ -11,7 +14,9 @@ class MealCard extends StatelessWidget {
   Widget build(BuildContext context) {
     List meal = context.watch<HomepageViewModel>().meals;
     List calories = context.watch<HomepageViewModel>().calories;
+    List<Nutritions> breakfast = context.watch<FoodViewModel>().breakfast;
 
+    int val = context.watch<SearchViewModel>().buttonName;
     return Container(
       margin: const EdgeInsets.all(15),
       height: MediaQuery.of(context).size.height * 0.35,
@@ -20,10 +25,32 @@ class MealCard extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => showDialog(
+              barrierColor: Colors.purple.shade100,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text(meal[index]),
-                  content: Text('Onion'),
+                  content: Container(
+                    width: 200,
+                    height: 200,
+                    child: ListView.builder(
+                      shrinkWrap: false,
+                      itemCount: breakfast.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (val == 0) {
+                          return Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: breakfast[index].name,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
                   actions: <Widget>[
                     TextButton(
                       style: TextButton.styleFrom(
@@ -66,7 +93,7 @@ class MealCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      _addButton(context)
+                      _addButton(context, index)
                     ]),
               ),
             ),
@@ -77,8 +104,10 @@ class MealCard extends StatelessWidget {
   }
 }
 
-Widget _addButton(BuildContext context) => ElevatedButton(
+Widget _addButton(BuildContext context, int index) => ElevatedButton(
       onPressed: () {
+        var provider = Provider.of<SearchViewModel>(context, listen: false);
+        provider.sendButtonName(index);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SearchPage()));
       },

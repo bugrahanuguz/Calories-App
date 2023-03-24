@@ -8,6 +8,7 @@ class SearchViewModel extends ChangeNotifier {
   double protein = 0;
   double carb = 0;
   double fat = 0;
+  int buttonName = 0;
 
   addFood(String txt) {
     food.add(txt);
@@ -20,7 +21,6 @@ class SearchViewModel extends ChangeNotifier {
     protein += double.parse(foodList[index].proteinG.toString());
     carb += double.parse(foodList[index].carbohydratesTotalG.toString());
     fat += double.parse(foodList[index].fatTotalG.toString());
-
     print(cal);
     notifyListeners();
   }
@@ -38,5 +38,9 @@ class SearchViewModel extends ChangeNotifier {
   clearFoodList() {
     foodList.clear();
     notifyListeners();
+  }
+
+  sendButtonName(int index) {
+    buttonName = index;
   }
 }
