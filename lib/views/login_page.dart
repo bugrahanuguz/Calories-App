@@ -6,6 +6,7 @@ import 'package:softito_final_project/components/login__register_page/login_goog
 import 'package:softito_final_project/components/login__register_page/login_to_register.dart';
 import 'package:softito_final_project/components/login__register_page/signButton.dart';
 import 'package:softito_final_project/components/login__register_page/text_field.dart';
+import 'package:softito_final_project/viewmodel/foods_view_model.dart';
 import 'package:softito_final_project/viewmodel/login_view_model.dart';
 import 'package:softito_final_project/views/home_page.dart';
 import 'package:softito_final_project/views/register_page.dart';
@@ -30,6 +31,11 @@ class LoginPage extends StatelessWidget {
         print(usernameController.text + passwordController.text);
         print(provider.isLogin);
         if (provider.isLogin) {
+          var prov = Provider.of<FoodViewModel>(context, listen: false);
+          prov.getBreakfast(provider.user);
+          prov.getLunch(provider.user);
+          prov.getDinner(provider.user);
+          print(prov.breakfast);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         }

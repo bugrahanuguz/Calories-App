@@ -9,6 +9,9 @@ String _foodApi = ConstVariable.firebase_user_api;
 class FoodService {
   Uri getUrl(String endpoint) => Uri.parse("$_foodApi/$endpoint.json");
 
+  double _breakfastcal = 0;
+  double get breakfastcal => _breakfastcal;
+
   Future<List<Nutritions>> getFoods() async {
     http.Response response = await http.get(getUrl("foods"));
     List<Nutritions> list = [];
@@ -23,44 +26,57 @@ class FoodService {
     return list;
   }
 
-  Future<List<Nutritions>> getBreakfast() async {
-    http.Response response = await http.get(getUrl("foods/breakfast"));
+  Future<List<Nutritions>> getBreakfast(UserModel user) async {
+    http.Response response =
+        await http.get(getUrl("users/${user.id}/foods/breakfast"));
     List<Nutritions> list = [];
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
+      print(data);
       for (var key in data.keys) {
-        Nutritions user = Nutritions.fromMap(data[key]);
-        user.name = key;
-        list.add(user);
+        Nutritions nut = Nutritions.fromMap(data[key]);
+        list.add(nut);
       }
+      for (var i = 0; i < list.length; i++) {
+        _breakfastcal += list[i].calories!;
+      }
+      print(breakfastcal);
+      print("----------");
+      print(list);
     }
     return list;
   }
 
-  Future<List<Nutritions>> getDinner() async {
-    http.Response response = await http.get(getUrl("foods/dinner"));
+  Future<List<Nutritions>> getDinner(UserModel user) async {
+    http.Response response =
+        await http.get(getUrl("users/${user.id}/foods/dinner"));
     List<Nutritions> list = [];
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
+      print(data);
       for (var key in data.keys) {
-        Nutritions user = Nutritions.fromMap(data[key]);
-        user.name = key;
-        list.add(user);
+        Nutritions nut = Nutritions.fromMap(data[key]);
+        list.add(nut);
       }
+      print("----------");
+      print(list);
     }
     return list;
   }
 
-  Future<List<Nutritions>> getLunch() async {
-    http.Response response = await http.get(getUrl("foods/lunch"));
+  Future<List<Nutritions>> getLunch(UserModel user) async {
+    http.Response response =
+        await http.get(getUrl("users/${user.id}/foods/lunch"));
     List<Nutritions> list = [];
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
+      print(data);
       for (var key in data.keys) {
-        Nutritions user = Nutritions.fromMap(data[key]);
-        user.name = key;
-        list.add(user);
+        Nutritions nut = Nutritions.fromMap(data[key]);
+        list.add(nut);
       }
+      print("----------");
+      print(list);
     }
     return list;
   }
@@ -81,6 +97,7 @@ class FoodService {
         body: food.toJson(),
         headers: {"Content-Type": "application/json"});
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      getBreakfast(users);
       return food;
     } else {
       return null;
@@ -93,6 +110,8 @@ class FoodService {
         body: food.toJson(),
         headers: {"Content-Type": "application/json"});
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      getLunch(users);
+
       return food;
     } else {
       return null;
@@ -105,6 +124,8 @@ class FoodService {
         body: food.toJson(),
         headers: {"Content-Type": "application/json"});
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      getDinner(users);
+
       return food;
     } else {
       return null;
