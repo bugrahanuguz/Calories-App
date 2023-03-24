@@ -19,8 +19,8 @@ class LoginToRegister extends StatelessWidget {
             onPressed: ontap,
             child: Text(
               "Register here",
-              style:
-                  TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Color(0xffC92C6D), fontWeight: FontWeight.bold),
             ))
       ],
     );

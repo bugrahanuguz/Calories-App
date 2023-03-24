@@ -25,8 +25,9 @@ class _SearchPageState extends State<SearchPage> {
     List<Nutritions> foodList = context.watch<SearchViewModel>().foodList;
     UserModel user = context.read<LoginViewModel>().user;
     return Scaffold(
+      backgroundColor: Color(0xffFFEAEA),
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Color(0xff609EA2),
         leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -102,7 +103,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: Text(
                     "Foods",
                     style: TextStyle(
-                        color: Colors.purple,
+                        color: Color(0xffC92C6D),
                         fontSize: 22,
                         fontWeight: FontWeight.bold),
                   )),
@@ -113,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.purple,
+        backgroundColor: Color(0xffC92C6D),
         onPressed: () async {
           var pr = Provider.of<SearchViewModel>(context, listen: false);
           var vall = pr.buttonName;

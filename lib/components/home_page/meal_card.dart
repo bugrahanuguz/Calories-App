@@ -13,19 +13,20 @@ class MealCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List meal = context.watch<HomepageViewModel>().meals;
+    List<IconData?> mealIcon = context.watch<HomepageViewModel>().mealsIcon;
     List calories = context.watch<HomepageViewModel>().calories;
     List<Nutritions> breakfast = context.watch<FoodViewModel>().breakfast;
 
     int val = context.watch<SearchViewModel>().buttonName;
     return Container(
-      margin: const EdgeInsets.all(15),
-      height: MediaQuery.of(context).size.height * 0.35,
+      margin: const EdgeInsets.all(20),
+      height: MediaQuery.of(context).size.height * 0.4,
       child: ListView.builder(
         itemCount: meal.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => showDialog(
-              barrierColor: Colors.purple.shade100,
+              barrierColor: Color(0xffFFEAEA),
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text(meal[index]),
@@ -84,10 +85,20 @@ class MealCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
-                              meal[index],
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            Row(
+                              children: [
+                                Text(
+                                  meal[index],
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(width: 10),
+                                Icon(
+                                  mealIcon[index],
+                                  size: 20,
+                                )
+                              ],
                             ),
                             Text(calories[index]),
                           ],
@@ -111,9 +122,9 @@ Widget _addButton(BuildContext context, int index) => ElevatedButton(
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SearchPage()));
       },
-      child: const Icon(Icons.add, color: Colors.purple),
+      child: const Icon(Icons.add, color: Color(0xffC92C6D)),
       style: ElevatedButton.styleFrom(
-          shape: const CircleBorder(side: BorderSide(color: Colors.purple)),
+          shape: const CircleBorder(side: BorderSide(color: Color(0xffC92C6D))),
           padding: const EdgeInsets.all(5),
           backgroundColor: Colors.grey.shade300),
     );
